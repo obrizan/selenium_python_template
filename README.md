@@ -2,16 +2,12 @@
 
 Welcome to the Selenium + Python Template Project! This repository provides a well-structured, scalable framework for test automation using Selenium WebDriver and Python. It's designed to help you get started quickly and maintain your test automation efforts efficiently.
 
----
-
 ## 📋 Features
 
 - **Modular Design**: Organized structure with reusable components like PageObjects and Test Data Factories.
 - **Scalability**: Easy to extend for larger projects.
 - **Integration-Ready**: Built-in support for integrating with APIs, CI/CD pipelines, and reporting tools.
 - **Cross-Browser Support**: Pre-configured WebDriver factory for managing multiple browsers.
-
----
 
 ## 🏗️ Project Structure
 
@@ -68,13 +64,15 @@ Place it in the drivers/ directory or update your system PATH.
 
 ## ⚙️Configuration
 
-Set environment variables:
+Set environment variables. Pay attention to `FRONTEND_URL` — it doesn't have any default value, it must be set 
+before running tests.
 
-| Variable             | Description                                                           | Default            |
-|----------------------|-----------------------------------------------------------------------|--------------------|
-| `SELENIUM_DRIVER_KIND` | Options: `remote`, `chrome`, `safari`, `firefox`.                     | `chrome`           |
-| `REMOTE_DRIVER_URL` | Used when `SELENIUM_DRIVER_KIND=remote`. | `http://localhost:3000`               |
-| `WINDOW_RESOLUTION` | Browser window resolution. Values are defined in `webdriver_factory.py` | `DESKTOP_1280X720` |
+| Variable             | Description                                                             | Default                |
+|----------------------|-------------------------------------------------------------------------|------------------------|
+| `FRONTEND_URL` | Base URL for web application under test.                                |                        |
+| `SELENIUM_DRIVER_KIND` | Options: `remote`, `chrome`, `safari`, `firefox`.                       | `chrome`               |
+| `REMOTE_DRIVER_URL` | Used when `SELENIUM_DRIVER_KIND=remote`.                                | `http://localhost:3000` |
+| `WINDOW_RESOLUTION` | Browser window resolution. Values are defined in `webdriver_factory.py` | `DESKTOP_1280X720`     |
 
 ## 🧪 Running Tests
 Run all tests using pytest:

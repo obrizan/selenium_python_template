@@ -71,7 +71,7 @@ def get_safari_driver() -> WebDriver:
     stop_max_attempt_number=3,
     stop_max_delay=10000,
     wait_fixed=1000,
-#    retry_on_exception=lambda e: isinstance(e, NewConnectionError) or isinstance(e, ConnectionRefusedError)
+    #    retry_on_exception=lambda e: isinstance(e, NewConnectionError) or isinstance(e, ConnectionRefusedError)
 )
 def get_remote_driver() -> WebDriver:
     res = get_window_resolution()
