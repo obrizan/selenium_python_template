@@ -40,15 +40,10 @@ selenium_python_template/
 
 ### Installation
 
-Clone the repository:
+Download the Selenium Python Template project from releases page: [https://github.
+com/obrizan/selenium_python_template/releases/](https://github.com/obrizan/selenium_python_template/releases/).
 
-```bash
-git clone https://github.com/obrizan/selenium_python_template.git
-cd selenium_python_template
-```
-
-
-Create and activate virutal environment (optional, but recommended):
+Create and activate virtual environment (optional, but recommended):
 
 ```bash
 python -m venv .venv
