@@ -1,0 +1,57 @@
+name: UI Tests
+
+on:
+  push:
+    branches:
+      - main
+      - initial
+  pull_request:
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  ui-tests:
+    runs-on: ubuntu-latest
+    services:
+      headless:
+        image: browserless/chrome:latest
+        options: >-
+          --memory=2048m
+        env:
+          CONNECTION_TIMEOUT: "900000" # 15 minutes
+        ports:
+          # Opens tcp port 6379 on the host and service container
+          - 3000:3000
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+      # Install dependencies
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Set environment variables
+      - name: Set environment variables
+        run: |
+          echo "SELENIUM_DRIVER_KIND=remote" >> $GITHUB_ENV
+          echo "REMOTE_DRIVER_URL=http://127.0.0.1:3000" >> $GITHUB_ENV
+
+      # Run tests
+      - name: Run UI tests
+        run: pytest tests --html=test-reports/report.html --self-contained-html -vvv --junitxml=test-reports/report.xml
+        env:
+          FRONTEND_URL: ${{ vars.FRONTEND_URL }}
+
+      # Upload test reports
+      - name: Upload test reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-reports
+          path: test-reports/**

@@ -1,0 +1,30 @@
+image: python:3.12-slim
+
+definitions:
+  services:
+    headless:
+      image: browserless/chrome:latest
+      variables:
+        # Connection timeout is a parameter that sets how long any session can run for.
+        # This is in place to prevent scripts that don't clean up properly, or run into
+        # errors that cause them to the app froze. The value of which can be set in milliseconds,
+        # and defaults to 30000, or 30 seconds.
+        # https://docs.browserless.io/docs/docker.html#connection-timeout
+        CONNECTION_TIMEOUT: "900000"
+      memory: 2048
+
+pipelines:
+  default:
+    - step:
+        name: UI Tests
+        services:
+          - headless
+        caches:
+          - pip
+        script:
+          - pip install -r requirements.txt
+          - export SELENIUM_DRIVER_KIND=remote
+          - export REMOTE_DRIVER_URL=http://localhost:3000
+          - pytest tests --html=test-reports/report.html --self-contained-html -vvv --junitxml=test-reports/report.xml
+        artifacts:
+          - test-reports/**

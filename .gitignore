@@ -1,0 +1,4 @@
+.idea
+test-reports/
+__pycache__
+.DS_Store

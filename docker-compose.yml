@@ -1,0 +1,38 @@
+services:
+  tests:
+    build:
+      context: .
+    environment:
+      SELENIUM_DRIVER_KIND: "remote"
+      FRONTEND_URL: ${FRONTEND_URL}
+      REMOTE_DRIVER_URL: "http://remote_driver:3000"
+      # Adjust TZ to your timezone to get correct date/time in test reports.
+      TZ: Europe/Kiev
+    depends_on:
+      - remote_driver
+    networks:
+      - selenium_template_python_network
+    volumes:
+      - test-reports:/app/test-reports
+
+  remote_driver:
+    image: browserless/chrome:latest
+    environment:
+      CONNECTION_TIMEOUT: "900000"
+    ports:
+      - "3000:3000"
+    networks:
+      - selenium_template_python_network
+
+
+networks:
+  selenium_template_python_network:
+    driver: bridge
+
+volumes:
+  test-reports:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./test-reports
