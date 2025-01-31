@@ -1,7 +1,10 @@
 import os
 
 import pytest
-from selenium.common import ElementNotInteractableException
+from selenium.common import (
+    ElementNotInteractableException,
+    InvalidElementStateException,
+)
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 
@@ -25,6 +28,8 @@ def test_send_keys(driver: WebDriver):
     with pytest.raises(ElementNotInteractableException) as exc:
         input_el.send_keys("hello")
 
+    assert input_el.get_attribute("value") == ""
+
 
 def test_click_auto_wait(driver: WebDriver, autowait):
     driver.get(f"file://{os.path.abspath('utils/autowait.html')}")
@@ -44,3 +49,25 @@ def test_send_keys_auto_wait(driver: WebDriver, autowait):
     input_el.send_keys("hello")
 
     assert input_el.get_attribute("value") == "hello"
+
+
+def test_clear(driver: WebDriver):
+    driver.get(f"file://{os.path.abspath('utils/autowait.html')}")
+
+    fourth_button = driver.find_element(By.ID, "fourth")
+    textarea_el = driver.find_element(By.ID, "textarea")
+    fourth_button.click()
+    with pytest.raises(InvalidElementStateException) as exc:
+        textarea_el.clear()
+    assert textarea_el.get_attribute("value") == "Some text which must be cleared"
+
+
+def test_clear_autowait(driver: WebDriver, autowait):
+    driver.get(f"file://{os.path.abspath('utils/autowait.html')}")
+
+    fourth_button = driver.find_element(By.ID, "fourth")
+    textarea_el = driver.find_element(By.ID, "textarea")
+    fourth_button.click()
+    textarea_el.clear()
+
+    assert textarea_el.get_attribute("value") == ""
