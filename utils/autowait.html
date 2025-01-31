@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>
+    <button id="first" onclick="first_button_on_click()">Enable button</button>
+</p>
+<p>
+    <button id="second" disabled onclick="second_button_on_click()">Second button</button>
+</p>
+<p id="placeholder"></p>
+<p>
+    <button id="third" onclick="third_button_on_click()">Enable input</button>
+</p>
+<p>
+    <label for="input">Disabled input</label><input id="input" disabled />
+</p>
+<script>
+    function first_button_on_click() {
+        setTimeout(() => {
+            document.getElementById("second").disabled = false;
+        }, 1500);
+    }
+
+    function second_button_on_click() {
+        document.getElementById("placeholder").innerText = "Second button works!";
+    }
+
+    function third_button_on_click() {
+        setTimeout(() => {
+            document.getElementById("input").disabled = false;
+        }, 1500);
+    }
+</script>
+</body>
+</html>

@@ -8,6 +8,7 @@ Welcome to the Selenium + Python Template Project! This repository provides a we
 - **Scalability**: Easy to extend for larger projects.
 - **Integration-Ready**: Built-in support for integrating with APIs, CI/CD pipelines, and reporting tools.
 - **Cross-Browser Support**: Pre-configured WebDriver factory for managing multiple browsers.
+- **Auto-waiting**: `WebDriver.click()` waits for an element to be clickable automatically.
 
 ## 🏗️ Project Structure
 
