@@ -111,7 +111,7 @@ def patched_find_element_factory(timeout: float):
     return patched_find_element
 
 
-def enable_autowait(timeout: float = 2.0) -> None:
+def enable_autowait(timeout: float = 10.0) -> None:
     """
     Enables auto-waiting globally for all WebDriver.click() invokcations
     Args:
