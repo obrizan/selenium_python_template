@@ -9,6 +9,8 @@ Welcome to the Selenium + Python Template Project! This repository provides a we
 - **Integration-Ready**: Built-in support for integrating with APIs, CI/CD pipelines, and reporting tools.
 - **Cross-Browser Support**: Pre-configured WebDriver factory for managing multiple browsers.
 - **Autowaiting**: `WebElement.click()`, `WebElement.send_keys()`, `WebElement.clear()` waits for an element to be enabled/clickable/editable automatically, use `autowait` fixture. Feature inspired by Playwright.
+- **Page-object generator**: OpenAI-based page object generator (proof of concept). 
+- **Self-healing for missing selectors**: OpenAI-based self-healing mechanism to work-around ElementNotFound exception (proof of concept). 
 
 ## 🏗️ Project Structure
 
@@ -74,6 +76,8 @@ before running tests.
 | `SELENIUM_DRIVER_KIND` | Options: `remote`, `chrome`, `safari`, `firefox`.                       | `chrome`               |
 | `REMOTE_DRIVER_URL` | Used when `SELENIUM_DRIVER_KIND=remote`.                                | `http://localhost:3000` |
 | `WINDOW_RESOLUTION` | Browser window resolution. Values are defined in `webdriver_factory.py` | `DESKTOP_1280X720`     |
+| `OPENAI_API_KEY` | Open AI API key for AI-based features.                                  |      |
+| `OPENAI_ASSISTANT_ID` | Open AI's assistant ID for interactive page-object generation.          |      |
 
 ## 🧪 Running Tests
 Run all tests using pytest:
