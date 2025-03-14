@@ -45,7 +45,7 @@ def test_send_keys_auto_wait(driver: WebDriver, autowait):
 
     third_button = driver.find_element(By.ID, "third")
     third_button.click()
-    input_el = driver.find_element(By.ID, "input")
+    input_el = driver.find_element(By.ID, "disabled_input")
     input_el.send_keys("hello")
 
     assert input_el.get_attribute("value") == "hello"
