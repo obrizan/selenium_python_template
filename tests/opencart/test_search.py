@@ -1,20 +1,30 @@
+import pytest
+
+
 def test_correct_count(search_page) -> None:
     results = search_page.get_search_results()
 
     assert len(results) == 12
 
 
-def test_sort_high_low(search_page) -> None:
-    search_page.sort_price_high_low()
+@pytest.mark.parametrize(
+    "sort_method, attr, reverse",
+    [
+        ("sort_price_low_high", "price", False),
+        ("sort_price_high_low", "price", True),
+        ("sort_name_az", "name", False),
+        ("sort_name_za", "name", True),
+    ],
+)
+def test_sorting(search_page, sort_method, attr, reverse) -> None:
+    getattr(search_page, sort_method)()
 
     products = search_page.get_search_results()
-    prices = [product.price for product in products]
-    assert prices == sorted(prices, reverse=True)
+    values = [getattr(p, attr) for p in products]
 
+    if attr == "name":
+        sorted_values = sorted(values, key=str.casefold, reverse=reverse)
+    else:
+        sorted_values = sorted(values, reverse=reverse)
 
-def test_sort_name_za(search_page) -> None:
-    search_page.sort_name_za()
-
-    products = search_page.get_search_results()
-    names = [product.name for product in products]
-    assert names == sorted(names, key=str.casefold, reverse=True)
+    assert values == sorted_values

@@ -9,7 +9,7 @@ from webdriver_factory import get_driver
 
 @pytest.fixture(scope="module")
 def driver() -> Generator[WebDriver, None, None]:
-    """Returns initialized WedDriver instance."""
+    """Returns initialized WebDriver instance."""
     drv = get_driver()
     yield drv
     drv.quit()

@@ -50,7 +50,7 @@ def patched_send_keys_factory(timeout: float):
 
     def patched_send_keys(self, *args, **kwargs):
         """
-        Patches the WebElement's click method to wait for the element to be clickable.
+        Patches the WebElement's send_keys method to wait for the element to be clickable.
         Args:
             self: WebElement object.
         """
