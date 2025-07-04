@@ -24,3 +24,7 @@ def test_extract_decimal_prices_many() -> None:
         Decimal(122.00),
         Decimal(100.00),
     ]
+
+
+def test_extract_decimal_prices_without_commas() -> None:
+    assert extract_decimal_prices("$2110.00") == [Decimal(2110.00)]
