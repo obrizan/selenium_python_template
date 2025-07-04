@@ -51,7 +51,7 @@ jobs:
 
       # Upload test reports
       - name: Upload test reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-reports
           path: test-reports/**
