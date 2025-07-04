@@ -76,7 +76,7 @@ def get_safari_driver() -> WebDriver:
 def get_remote_driver() -> WebDriver:
     res = get_window_resolution()
     options = Options()
-    options.add_argument(f"--window-size={res['width']}, {res['height']}")
+    options.add_argument(f"--window-size={res['width']},{res['height']}")
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-smooth-scrolling")
